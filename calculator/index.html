@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="calculator" data-testid="calculator">
+      <header class="calculator__header">
+        <h1 class="calculator__title">Calculator</h1>
+        <p class="calculator__subtitle">Tap digits, then + to add</p>
+      </header>
+
+      <div class="calculator__display-wrap">
+        <p class="calculator__running-label" data-testid="running-total-label">Running total</p>
+        <p class="calculator__display" data-testid="display" aria-live="polite">0</p>
+      </div>
+
+      <div class="calculator__keypad" role="group" aria-label="Calculator keypad">
+        <button type="button" class="btn btn--function" data-action="clear" data-testid="btn-clear">
+          AC
+        </button>
+        <span class="calculator__spacer" aria-hidden="true"></span>
+        <span class="calculator__spacer" aria-hidden="true"></span>
+        <button type="button" class="btn btn--operator" data-action="add" data-testid="btn-add" aria-label="Add">
+          +
+        </button>
+
+        <button type="button" class="btn btn--number" data-action="digit" data-digit="7" data-testid="btn-7">
+          7
+        </button>
+        <button type="button" class="btn btn--number" data-action="digit" data-digit="8" data-testid="btn-8">
+          8
+        </button>
+        <button type="button" class="btn btn--number" data-action="digit" data-digit="9" data-testid="btn-9">
+          9
+        </button>
+        <button type="button" class="btn btn--operator" data-action="add" aria-label="Add">
+          +
+        </button>
+
+        <button type="button" class="btn btn--number" data-action="digit" data-digit="4" data-testid="btn-4">
+          4
+        </button>
+        <button type="button" class="btn btn--number" data-action="digit" data-digit="5" data-testid="btn-5">
+          5
+        </button>
+        <button type="button" class="btn btn--number" data-action="digit" data-digit="6" data-testid="btn-6">
+          6
+        </button>
+        <button type="button" class="btn btn--operator" data-action="add" aria-label="Add">
+          +
+        </button>
+
+        <button type="button" class="btn btn--number" data-action="digit" data-digit="1" data-testid="btn-1">
+          1
+        </button>
+        <button type="button" class="btn btn--number" data-action="digit" data-digit="2" data-testid="btn-2">
+          2
+        </button>
+        <button type="button" class="btn btn--number" data-action="digit" data-digit="3" data-testid="btn-3">
+          3
+        </button>
+        <button type="button" class="btn btn--operator" data-action="add" aria-label="Add">
+          +
+        </button>
+
+        <button type="button" class="btn btn--number btn--wide" data-action="digit" data-digit="0" data-testid="btn-0">
+          0
+        </button>
+        <button type="button" class="btn btn--operator" data-action="add" aria-label="Add">
+          +
+        </button>
+      </div>
+    </main>
+
+    <script type="module">
+      import { bindCalculator } from "./calculator.js";
+
+      bindCalculator(document.querySelector('[data-testid="calculator"]'));
+    </script>
+  </body>
+</html>
