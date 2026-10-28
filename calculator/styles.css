@@ -1,0 +1,117 @@
+:root {
+  color-scheme: dark light;
+  --bg: #000000;
+  --surface: #1c1c1e;
+  --key: #333333;
+  --key-light: #a5a5a5;
+  --key-light-text: #000000;
+  --accent: #ff9f0a;
+  --text: #ffffff;
+  --text-muted: #8e8e93;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Helvetica Neue", sans-serif;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f2f2f7;
+    --surface: #ffffff;
+    --key: #ffffff;
+    --key-light: #d4d4d8;
+    --key-light-text: #000000;
+    --accent: #ff9500;
+    --text: #000000;
+    --text-muted: #636366;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at top, #2c2c2e 0%, var(--bg) 55%);
+  color: var(--text);
+}
+
+.calculator {
+  width: min(100vw - 2rem, 22rem);
+  padding: 1.25rem;
+  border-radius: 1.75rem;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  box-shadow: 0 1.25rem 3rem rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(20px);
+}
+
+.calculator__header {
+  margin-bottom: 1rem;
+}
+
+.calculator__label {
+  margin: 0 0 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.calculator__display {
+  margin: 0;
+  min-height: 4.5rem;
+  padding: 0.5rem 0.25rem;
+  font-size: clamp(2.5rem, 12vw, 3.75rem);
+  font-weight: 300;
+  line-height: 1.1;
+  text-align: right;
+  word-break: break-all;
+}
+
+.calculator__keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+.key {
+  appearance: none;
+  border: none;
+  border-radius: 999px;
+  aspect-ratio: 1;
+  font-size: 1.5rem;
+  font-weight: 400;
+  cursor: pointer;
+  background: var(--key);
+  color: var(--text);
+  transition: transform 120ms ease, filter 120ms ease;
+}
+
+.key:active {
+  transform: scale(0.96);
+  filter: brightness(1.08);
+}
+
+.key--wide {
+  grid-column: span 2;
+  aspect-ratio: auto;
+  min-height: 4.25rem;
+  border-radius: 999px;
+}
+
+.key--light {
+  background: var(--key-light);
+  color: var(--key-light-text);
+}
+
+.key--accent {
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 2rem;
+  font-weight: 500;
+}
