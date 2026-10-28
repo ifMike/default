@@ -1,0 +1,8 @@
+{
+  "name": "calculator-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test calculator/tests/calculator.test.mjs"
+  }
+}
