@@ -1,0 +1,158 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: 24px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: #000;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+.calculator {
+  width: min(100%, 320px);
+  border-radius: 24px;
+  overflow: hidden;
+  background: #000;
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.display-panel {
+  padding: 32px 24px 20px;
+  text-align: right;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.running-total {
+  margin: 0;
+  min-height: 1.25rem;
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.02em;
+}
+
+.display {
+  display: block;
+  font-size: clamp(3rem, 14vw, 4rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding: 12px;
+  background: #000;
+}
+
+.key {
+  appearance: none;
+  border: none;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  font-size: 1.75rem;
+  font-weight: 400;
+  font-family: inherit;
+  color: #fff;
+  background: #333333;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    transform 0.08s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.key:active {
+  transform: scale(0.96);
+}
+
+.key:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+}
+
+.key-fn {
+  background: #a5a5a5;
+  color: #000;
+}
+
+.key-fn:active {
+  background: #d4d4d4;
+}
+
+.key-op {
+  background: #ff9f0a;
+  color: #fff;
+}
+
+.key-op:active {
+  background: #ffb340;
+}
+
+.key-op.is-active {
+  background: #fff;
+  color: #ff9f0a;
+}
+
+.key-equals {
+  background: #ff9f0a;
+  color: #fff;
+}
+
+.key-equals:active {
+  background: #ffb340;
+}
+
+.key-zero {
+  grid-column: span 2;
+  aspect-ratio: auto;
+  border-radius: 999px;
+  text-align: left;
+  padding-left: 28px;
+}
+
+.key:disabled {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.key-spacer {
+  display: block;
+}
+
+.key-spacer-wide {
+  grid-column: span 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .key {
+    transition: none;
+  }
+}
