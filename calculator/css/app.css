@@ -1,0 +1,130 @@
+:root {
+  color-scheme: dark;
+  --bg: #000000;
+  --display-fg: #ffffff;
+  --key-number: #333333;
+  --key-number-active: #737373;
+  --key-function: #a5a5a5;
+  --key-function-fg: #000000;
+  --key-operator: #ff9f0a;
+  --key-operator-active: #ffb340;
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui,
+    sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.calculator {
+  width: min(100%, 320px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.display-wrap {
+  padding: 0.5rem 1rem 1rem;
+  min-height: 5rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.display {
+  font-size: clamp(2.5rem, 12vw, 4rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--display-fg);
+  text-align: right;
+  word-break: break-all;
+}
+
+.keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+.keys > .key--wide:first-child {
+  grid-column: span 3;
+}
+
+.key--span-3 {
+  grid-column: span 3;
+  aspect-ratio: auto;
+  border-radius: 2.5rem;
+  text-align: left;
+  padding-left: 1.75rem;
+}
+
+.keys__spacer {
+  display: block;
+}
+
+.key {
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 50%;
+  font-family: inherit;
+  font-size: 1.75rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: filter 0.1s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.key:active {
+  filter: brightness(1.15);
+}
+
+.key--function {
+  background: var(--key-function);
+  color: var(--key-function-fg);
+}
+
+.key--operator {
+  background: var(--key-operator);
+  color: #ffffff;
+}
+
+.key--operator.is-active {
+  background: #ffffff;
+  color: var(--key-operator);
+}
+
+.key--number {
+  background: var(--key-number);
+  color: #ffffff;
+}
+
+.key--wide {
+  grid-column: span 2;
+  aspect-ratio: auto;
+  border-radius: 2.5rem;
+  text-align: left;
+  padding-left: 1.75rem;
+}
+
+@media (min-width: 380px) {
+  .key {
+    font-size: 2rem;
+  }
+}
