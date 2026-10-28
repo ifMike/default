@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#000000" />
+    <title>Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app" aria-label="Calculator">
+      <section class="display" aria-live="polite" aria-atomic="true">
+        <span class="display__label">Total</span>
+        <div id="total-display" class="display__total">0</div>
+        <div id="entry-display" class="display__entry" aria-hidden="true"></div>
+      </section>
+
+      <div class="keypad" role="group" aria-label="Keys">
+        <button type="button" class="key key--function" data-action="clear">AC</button>
+        <button type="button" class="key key--function key--ghost" tabindex="-1" aria-hidden="true" disabled></button>
+        <button type="button" class="key key--function key--ghost" tabindex="-1" aria-hidden="true" disabled></button>
+        <button type="button" class="key key--operator" data-action="add" aria-label="Add to total">+</button>
+
+        <button type="button" class="key key--number" data-digit="7">7</button>
+        <button type="button" class="key key--number" data-digit="8">8</button>
+        <button type="button" class="key key--number" data-digit="9">9</button>
+        <button type="button" class="key key--operator" data-action="add" aria-label="Add to total">+</button>
+
+        <button type="button" class="key key--number" data-digit="4">4</button>
+        <button type="button" class="key key--number" data-digit="5">5</button>
+        <button type="button" class="key key--number" data-digit="6">6</button>
+        <button type="button" class="key key--operator" data-action="add" aria-label="Add to total">+</button>
+
+        <button type="button" class="key key--number" data-digit="1">1</button>
+        <button type="button" class="key key--number" data-digit="2">2</button>
+        <button type="button" class="key key--number" data-digit="3">3</button>
+        <button type="button" class="key key--operator" data-action="add" aria-label="Add to total">+</button>
+
+        <button type="button" class="key key--number key--wide" data-digit="0">0</button>
+        <button type="button" class="key key--operator key--add-final" data-action="add">Add</button>
+      </div>
+    </main>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

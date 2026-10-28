@@ -1,0 +1,164 @@
+:root {
+  color-scheme: dark;
+  --bg: #000000;
+  --display-fg: #ffffff;
+  --display-muted: rgba(255, 255, 255, 0.55);
+  --key-number: #333333;
+  --key-number-active: #737373;
+  --key-function: #a5a5a5;
+  --key-function-fg: #000000;
+  --key-operator: #ff9f0a;
+  --key-operator-active: #ffb340;
+  --key-operator-fg: #ffffff;
+  --radius: 50%;
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at top, #1c1c1e 0%, var(--bg) 55%);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+
+.app {
+  width: min(100vw - 2rem, 390px);
+  padding: 1.25rem 1rem 2rem;
+}
+
+.display {
+  text-align: right;
+  padding: 2.5rem 0.75rem 1.5rem;
+  min-height: 8.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.35rem;
+}
+
+.display__label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--display-muted);
+}
+
+.display__total {
+  font-size: clamp(3rem, 12vw, 4.5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--display-fg);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.display__entry {
+  font-size: 1.375rem;
+  font-weight: 400;
+  color: var(--display-muted);
+  min-height: 1.75rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+.key {
+  aspect-ratio: 1;
+  border: none;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 1.75rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background-color 0.12s ease, transform 0.08s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.key:active {
+  transform: scale(0.96);
+}
+
+.key--number {
+  background: var(--key-number);
+  color: var(--display-fg);
+}
+
+.key--number:active {
+  background: var(--key-number-active);
+}
+
+.key--function {
+  background: var(--key-function);
+  color: var(--key-function-fg);
+  font-size: 1.375rem;
+  font-weight: 500;
+}
+
+.key--function:active {
+  filter: brightness(1.08);
+}
+
+.key--operator {
+  background: var(--key-operator);
+  color: var(--key-operator-fg);
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.key--operator.is-active {
+  background: var(--display-fg);
+  color: var(--key-operator);
+}
+
+.key--operator:active {
+  background: var(--key-operator-active);
+}
+
+.key--ghost {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.key--wide {
+  grid-column: span 3;
+  aspect-ratio: auto;
+  border-radius: 2.5rem;
+  height: calc((min(100vw - 2rem, 390px) - 3rem) / 4);
+}
+
+.key--add-final {
+  grid-column: span 1;
+  aspect-ratio: auto;
+  border-radius: 2.5rem;
+  height: calc((min(100vw - 2rem, 390px) - 3rem) / 4);
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .key {
+    transition: none;
+  }
+}
