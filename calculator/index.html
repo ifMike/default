@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>Calculator</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <main class="calculator" aria-label="Calculator">
+      <div id="display" class="display" role="status" aria-live="polite" aria-atomic="true">0</div>
+      <div class="keypad">
+        <button type="button" class="function" data-key="AC" aria-label="All clear">AC</button>
+        <div class="spacer" aria-hidden="true"></div>
+        <div class="spacer" aria-hidden="true"></div>
+        <button type="button" class="operator" data-key="+" aria-label="Add">+</button>
+
+        <button type="button" class="digit" data-key="7">7</button>
+        <button type="button" class="digit" data-key="8">8</button>
+        <button type="button" class="digit" data-key="9">9</button>
+        <button type="button" class="operator" data-key="=" aria-label="Equals">=</button>
+
+        <button type="button" class="digit" data-key="4">4</button>
+        <button type="button" class="digit" data-key="5">5</button>
+        <button type="button" class="digit" data-key="6">6</button>
+        <div class="spacer" aria-hidden="true"></div>
+
+        <button type="button" class="digit" data-key="1">1</button>
+        <button type="button" class="digit" data-key="2">2</button>
+        <button type="button" class="digit" data-key="3">3</button>
+        <div class="spacer" aria-hidden="true"></div>
+
+        <button type="button" class="digit zero" data-key="0">0</button>
+        <button type="button" class="digit" data-key=".">.</button>
+        <div class="spacer" aria-hidden="true"></div>
+        <div class="spacer" aria-hidden="true"></div>
+      </div>
+    </main>
+    <script type="module" src="js/ui.js"></script>
+  </body>
+</html>
