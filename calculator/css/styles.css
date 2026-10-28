@@ -1,0 +1,157 @@
+/* Apple Human Interface Guidelines–inspired calculator styling */
+:root {
+  color-scheme: light dark;
+  --bg: #000;
+  --display-fg: #fff;
+  --display-muted: rgba(255, 255, 255, 0.55);
+  --key-num: #333333;
+  --key-num-fg: #fff;
+  --key-fn: #a5a5a5;
+  --key-fn-fg: #000;
+  --key-op: #ff9f0a;
+  --key-op-fg: #fff;
+  --key-active: rgba(255, 255, 255, 0.25);
+  --radius: 50%;
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    system-ui, "Segoe UI", sans-serif;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f2f2f7;
+    --display-fg: #000;
+    --display-muted: rgba(60, 60, 67, 0.6);
+    --key-num: #fff;
+    --key-num-fg: #000;
+    --key-fn: #d4d4d8;
+    --key-fn-fg: #000;
+    --key-op: #ff9500;
+    --key-op-fg: #fff;
+    --key-active: rgba(0, 0, 0, 0.12);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
+  -webkit-font-smoothing: antialiased;
+}
+
+.app {
+  width: min(100%, 390px);
+  padding: 1.25rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.display-panel {
+  text-align: right;
+  padding: 0.5rem 0.75rem 0;
+  min-height: 7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.35rem;
+}
+
+.total-label {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--display-muted);
+  text-transform: uppercase;
+}
+
+.display {
+  margin: 0;
+  font-size: clamp(3rem, 14vw, 4.5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--display-fg);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.key {
+  appearance: none;
+  border: none;
+  margin: 0;
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 1.75rem;
+  font-weight: 400;
+  cursor: pointer;
+  background: var(--key-num);
+  color: var(--key-num-fg);
+  transition: filter 0.12s ease, transform 0.08s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.key-wide {
+  grid-column: span 2;
+  aspect-ratio: auto;
+  border-radius: 999px;
+  min-height: 4.25rem;
+}
+
+.key-fn {
+  background: var(--key-fn);
+  color: var(--key-fn-fg);
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.key-op {
+  background: var(--key-op);
+  color: var(--key-op-fg);
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.key:hover {
+  filter: brightness(1.08);
+}
+
+.key:active {
+  filter: brightness(0.92);
+  transform: scale(0.97);
+}
+
+.key:focus-visible {
+  outline: 2px solid #0a84ff;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .key {
+    transition: none;
+  }
+}

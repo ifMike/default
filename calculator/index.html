@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Calculator</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <main class="app" aria-label="Calculator">
+      <header class="display-panel">
+        <p id="total-label" class="total-label" aria-live="polite">Total 0</p>
+        <output id="display" class="display" for="keypad" aria-live="polite">0</output>
+      </header>
+
+      <div id="keypad" class="keypad" role="group" aria-label="Keypad">
+        <button type="button" id="btn-clear" class="key key-fn" aria-label="Clear">
+          AC
+        </button>
+        <button type="button" id="btn-add" class="key key-op" aria-label="Add to total">
+          +
+        </button>
+
+        <button type="button" class="key" data-digit="7">7</button>
+        <button type="button" class="key" data-digit="8">8</button>
+        <button type="button" class="key" data-digit="9">9</button>
+
+        <button type="button" class="key" data-digit="4">4</button>
+        <button type="button" class="key" data-digit="5">5</button>
+        <button type="button" class="key" data-digit="6">6</button>
+
+        <button type="button" class="key" data-digit="1">1</button>
+        <button type="button" class="key" data-digit="2">2</button>
+        <button type="button" class="key" data-digit="3">3</button>
+
+        <button type="button" class="key key-wide" data-digit="0">0</button>
+        <button type="button" class="key" data-digit=".">.</button>
+      </div>
+    </main>
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>
