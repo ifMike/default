@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="calculator" data-testid="calculator">
+      <header class="calculator__header">
+        <p class="calculator__label">Running total</p>
+        <p
+          class="calculator__display"
+          data-testid="display"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          0
+        </p>
+      </header>
+
+      <div class="calculator__keys" role="group" aria-label="Calculator keys">
+        <button type="button" class="key key--light key--wide" data-action="clear">
+          AC
+        </button>
+        <button type="button" class="key" data-action="digit" data-digit="7">7</button>
+        <button type="button" class="key" data-action="digit" data-digit="8">8</button>
+        <button type="button" class="key" data-action="digit" data-digit="9">9</button>
+        <button type="button" class="key" data-action="digit" data-digit="4">4</button>
+        <button type="button" class="key" data-action="digit" data-digit="5">5</button>
+        <button type="button" class="key" data-action="digit" data-digit="6">6</button>
+        <button type="button" class="key key--accent" data-action="add" aria-label="Add">
+          +
+        </button>
+        <button type="button" class="key" data-action="digit" data-digit="1">1</button>
+        <button type="button" class="key" data-action="digit" data-digit="2">2</button>
+        <button type="button" class="key" data-action="digit" data-digit="3">3</button>
+        <button type="button" class="key" data-action="digit" data-digit="0">0</button>
+        <button type="button" class="key" data-action="digit" data-digit=".">.</button>
+      </div>
+    </main>
+
+    <script type="module">
+      import { bindCalculator } from "./calculator.js";
+
+      bindCalculator(document.querySelector("[data-testid=calculator]"));
+    </script>
+  </body>
+</html>
