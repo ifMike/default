@@ -1,0 +1,144 @@
+:root {
+  color-scheme: dark;
+  --bg: #000000;
+  --surface: #1c1c1e;
+  --key: #333333;
+  --key-fn: #a5a5a5;
+  --key-fn-text: #000000;
+  --key-op: #ff9f0a;
+  --key-op-active: #ffffff;
+  --text: #ffffff;
+  --text-muted: #8e8e93;
+  --radius: 999px;
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at top, #2c2c2e 0%, var(--bg) 55%);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+
+.calculator {
+  width: min(100vw - 2rem, 22rem);
+  padding: 1.25rem;
+  border-radius: 1.75rem;
+  background: rgba(28, 28, 30, 0.72);
+  backdrop-filter: blur(24px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+
+.display {
+  min-height: 7rem;
+  padding: 1rem 0.75rem 1.5rem;
+  text-align: right;
+}
+
+.display-label {
+  margin: 0 0 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.display-value {
+  display: block;
+  margin: 0;
+  font-size: clamp(2.75rem, 12vw, 4rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+.key {
+  border: 0;
+  height: 4.25rem;
+  border-radius: var(--radius);
+  font: 500 1.5rem/1 var(--font);
+  cursor: pointer;
+  transition: transform 0.08s ease, filter 0.08s ease, background 0.08s ease;
+}
+
+.key:active {
+  transform: scale(0.96);
+  filter: brightness(1.08);
+}
+
+.key:disabled {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.key-digit,
+.key-zero {
+  background: var(--key);
+  color: var(--text);
+}
+
+.key-zero {
+  grid-column: span 2;
+  text-align: left;
+  padding-left: 1.6rem;
+}
+
+.key-fn {
+  background: var(--key-fn);
+  color: var(--key-fn-text);
+}
+
+.key-op {
+  background: var(--key-op);
+  color: #ffffff;
+}
+
+.key-op-secondary {
+  opacity: 0.35;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+    --bg: #f2f2f7;
+    --surface: #ffffff;
+    --key: #ffffff;
+    --key-fn: #d4d4d8;
+    --key-fn-text: #000000;
+    --text: #000000;
+    --text-muted: #6e6e73;
+  }
+
+  body {
+    background: radial-gradient(circle at top, #ffffff 0%, var(--bg) 60%);
+  }
+
+  .calculator {
+    background: rgba(255, 255, 255, 0.82);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+  }
+}

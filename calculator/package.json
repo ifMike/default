@@ -1,0 +1,11 @@
+{
+  "name": "calculator",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/calculator.test.js",
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0"
+  }
+}

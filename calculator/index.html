@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="calculator" aria-label="Calculator">
+      <div class="display" aria-live="polite">
+        <p class="display-label">Total</p>
+        <output id="total" data-testid="total" class="display-value">0</output>
+      </div>
+
+      <div class="keypad" role="group" aria-label="Keypad">
+        <button type="button" id="btn-clear" class="key key-fn" data-testid="clear">
+          AC
+        </button>
+        <button type="button" class="key key-fn" disabled aria-hidden="true"></button>
+        <button type="button" class="key key-fn" disabled aria-hidden="true"></button>
+        <button type="button" id="btn-add" class="key key-op" data-testid="add" aria-label="Add">
+          +
+        </button>
+
+        <button type="button" class="key key-digit" data-digit="7">7</button>
+        <button type="button" class="key key-digit" data-digit="8">8</button>
+        <button type="button" class="key key-digit" data-digit="9">9</button>
+        <button type="button" class="key key-op key-op-secondary" disabled aria-hidden="true">
+          −
+        </button>
+
+        <button type="button" class="key key-digit" data-digit="4">4</button>
+        <button type="button" class="key key-digit" data-digit="5">5</button>
+        <button type="button" class="key key-digit" data-digit="6">6</button>
+        <button type="button" class="key key-op key-op-secondary" disabled aria-hidden="true">
+          ×
+        </button>
+
+        <button type="button" class="key key-digit" data-digit="1">1</button>
+        <button type="button" class="key key-digit" data-digit="2">2</button>
+        <button type="button" class="key key-digit" data-digit="3">3</button>
+        <button type="button" class="key key-op key-op-secondary" disabled aria-hidden="true">
+          ÷
+        </button>
+
+        <button type="button" class="key key-digit key-zero" data-digit="0">0</button>
+        <button type="button" class="key key-digit" data-digit=".">.</button>
+        <button type="button" id="btn-equals" class="key key-op" data-testid="equals" aria-label="Equals">
+          =
+        </button>
+      </div>
+    </main>
+    <script src="calculator.js"></script>
+  </body>
+</html>
