@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Calculator</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #000;
+      --display-fg: #fff;
+      --display-muted: rgba(255, 255, 255, 0.55);
+      --key-bg: #333;
+      --key-bg-active: #737373;
+      --key-fg: #fff;
+      --key-fn-bg: #a5a5a5;
+      --key-fn-fg: #000;
+      --key-op-bg: #ff9f0a;
+      --key-op-bg-active: #ffb340;
+      --radius: 50%;
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+        "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right)
+        env(safe-area-inset-bottom) env(safe-area-inset-left);
+    }
+
+    .calculator {
+      width: min(100%, 360px);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 16px;
+    }
+
+    .display {
+      text-align: right;
+      padding: 8px 12px 4px;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 4px;
+    }
+
+    .running-total-label {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--display-muted);
+      text-transform: uppercase;
+    }
+
+    .running-total {
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--display-muted);
+      font-variant-numeric: tabular-nums;
+      min-height: 28px;
+    }
+
+    .current-value {
+      font-size: clamp(48px, 12vw, 64px);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--display-fg);
+      font-variant-numeric: tabular-nums;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    button {
+      border: none;
+      font-family: inherit;
+      font-size: 28px;
+      font-weight: 400;
+      aspect-ratio: 1;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background 0.12s ease;
+      user-select: none;
+    }
+
+    button:active {
+      filter: brightness(1.08);
+    }
+
+    .key-digit,
+    .key-zero {
+      background: var(--key-bg);
+      color: var(--key-fg);
+    }
+
+    .key-digit:active,
+    .key-zero:active {
+      background: var(--key-bg-active);
+    }
+
+    .key-fn {
+      background: var(--key-fn-bg);
+      color: var(--key-fn-fg);
+      font-size: 24px;
+      font-weight: 500;
+    }
+
+    .key-op {
+      background: var(--key-op-bg);
+      color: #fff;
+      font-size: 32px;
+      font-weight: 400;
+    }
+
+    .key-op:active {
+      background: var(--key-op-bg-active);
+    }
+
+    .key-zero {
+      grid-column: span 2;
+      aspect-ratio: auto;
+      border-radius: 999px;
+      text-align: left;
+      padding-left: 28px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      button {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="calculator" aria-label="Calculator">
+    <div class="display" aria-live="polite">
+      <span class="running-total-label">Running total</span>
+      <div id="running-total" class="running-total">0</div>
+      <div id="current-value" class="current-value">0</div>
+    </div>
+
+    <div class="keypad">
+      <button type="button" class="key-fn" data-action="clear" aria-label="Clear">AC</button>
+      <button type="button" class="key-fn" data-action="toggle-sign" aria-label="Toggle sign">±</button>
+      <button type="button" class="key-fn" data-action="percent" aria-label="Percent">%</button>
+      <button type="button" class="key-op" data-action="add" aria-label="Add">+</button>
+
+      <button type="button" class="key-digit" data-digit="7">7</button>
+      <button type="button" class="key-digit" data-digit="8">8</button>
+      <button type="button" class="key-digit" data-digit="9">9</button>
+      <button type="button" class="key-digit" data-digit="4">4</button>
+      <button type="button" class="key-digit" data-digit="5">5</button>
+      <button type="button" class="key-digit" data-digit="6">6</button>
+      <button type="button" class="key-digit" data-digit="1">1</button>
+      <button type="button" class="key-digit" data-digit="2">2</button>
+      <button type="button" class="key-digit" data-digit="3">3</button>
+
+      <button type="button" class="key-zero" data-digit="0">0</button>
+      <button type="button" class="key-digit" data-action="decimal" aria-label="Decimal">.</button>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      var runningTotal = 0;
+      var currentInput = "0";
+      var hasDecimal = false;
+
+      var runningTotalEl = document.getElementById("running-total");
+      var currentValueEl = document.getElementById("current-value");
+
+      function formatNumber(value) {
+        var str = String(value);
+        if (str.length > 12) {
+          return Number(value).toPrecision(10).replace(/\.?0+$/, "");
+        }
+        return str;
+      }
+
+      function render() {
+        runningTotalEl.textContent = formatNumber(runningTotal);
+        currentValueEl.textContent = formatNumber(currentInput);
+      }
+
+      function currentNumber() {
+        return parseFloat(currentInput) || 0;
+      }
+
+      function appendDigit(digit) {
+        if (currentInput === "0" && digit !== ".") {
+          currentInput = String(digit);
+          hasDecimal = false;
+        } else if (currentInput === "-0" && digit !== ".") {
+          currentInput = "-" + String(digit);
+          hasDecimal = false;
+        } else {
+          currentInput += String(digit);
+        }
+        render();
+      }
+
+      function appendDecimal() {
+        if (hasDecimal) return;
+        hasDecimal = true;
+        if (currentInput === "-0") {
+          currentInput = "-0.";
+        } else if (!currentInput.includes(".")) {
+          currentInput += ".";
+        }
+        render();
+      }
+
+      function clearAll() {
+        runningTotal = 0;
+        currentInput = "0";
+        hasDecimal = false;
+        render();
+      }
+
+      function toggleSign() {
+        if (currentInput === "0") return;
+        if (currentInput.startsWith("-")) {
+          currentInput = currentInput.slice(1);
+        } else {
+          currentInput = "-" + currentInput;
+        }
+        render();
+      }
+
+      function percent() {
+        var n = currentNumber() / 100;
+        currentInput = String(n);
+        hasDecimal = currentInput.includes(".");
+        render();
+      }
+
+      function addToRunningTotal() {
+        runningTotal += currentNumber();
+        currentInput = "0";
+        hasDecimal = false;
+        render();
+      }
+
+      document.querySelector(".keypad").addEventListener("click", function (event) {
+        var target = event.target.closest("button");
+        if (!target) return;
+
+        var digit = target.getAttribute("data-digit");
+        if (digit !== null) {
+          appendDigit(digit);
+          return;
+        }
+
+        var action = target.getAttribute("data-action");
+        if (action === "decimal") appendDecimal();
+        else if (action === "clear") clearAll();
+        else if (action === "toggle-sign") toggleSign();
+        else if (action === "percent") percent();
+        else if (action === "add") addToRunningTotal();
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>
