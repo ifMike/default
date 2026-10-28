@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="calculator" aria-label="Calculator">
+      <div class="display-panel">
+        <p class="running-total" id="running-total" aria-live="polite"></p>
+        <output class="display" id="display" for="keys">0</output>
+      </div>
+      <div class="keys" id="keys" role="group" aria-label="Calculator keys">
+        <button type="button" class="key key-fn" data-action="clear">AC</button>
+        <span class="key-spacer" aria-hidden="true"></span>
+        <span class="key-spacer" aria-hidden="true"></span>
+        <button type="button" class="key key-op" data-action="add">+</button>
+
+        <button type="button" class="key" data-digit="7">7</button>
+        <button type="button" class="key" data-digit="8">8</button>
+        <button type="button" class="key" data-digit="9">9</button>
+        <button type="button" class="key key-equals" data-action="equals">=</button>
+
+        <button type="button" class="key" data-digit="4">4</button>
+        <button type="button" class="key" data-digit="5">5</button>
+        <button type="button" class="key" data-digit="6">6</button>
+        <span class="key-spacer" aria-hidden="true"></span>
+
+        <button type="button" class="key" data-digit="1">1</button>
+        <button type="button" class="key" data-digit="2">2</button>
+        <button type="button" class="key" data-digit="3">3</button>
+        <span class="key-spacer" aria-hidden="true"></span>
+
+        <button type="button" class="key key-zero" data-digit="0">0</button>
+        <button type="button" class="key" data-action="decimal">.</button>
+        <span class="key-spacer key-spacer-wide" aria-hidden="true"></span>
+      </div>
+    </main>
+    <script src="calculator.js"></script>
+  </body>
+</html>
